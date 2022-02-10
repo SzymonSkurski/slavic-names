@@ -10,12 +10,13 @@ use SlavicNames\Exception\NotSupportedGenderException;
 
 class SlavicNames
 {
+    public const RANDOM = 0;
     public const MALE = 1;
     public const FEMALE = 2;
     public const GENDERS = [self::MALE, self::FEMALE];
     public const GENDER_NAMES = [
         self::MALE => 'male',
-        self::FEMALE => 'female', //TODO:: create female names dictionary
+        self::FEMALE => 'female',
         //TODO:: create non binary gender and names dictionary
     ];
 
@@ -40,7 +41,7 @@ class SlavicNames
             $dictionary = $this->getNamesDictionary();
             $this->setRandChar();
         }
-        return $dictionary[array_rand($dictionary)];
+        return ucfirst($dictionary[array_rand($dictionary)]);
     }
 
     /**
@@ -88,12 +89,12 @@ class SlavicNames
     }
 
     /**
-     * @param string $gender
+     * @param int $gender
      * @throws NotSupportedGenderException
      */
-    private function checkGender(string $gender): void
+    private function checkGender(int $gender): void
     {
-        if (!array_key_exists($gender, self::GENDERS)) {
+        if (!in_array($gender, self::GENDERS, true)) {
             throw new NotSupportedGenderException('unsupported gender:' . $gender);
         }
     }

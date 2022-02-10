@@ -4,6 +4,7 @@
 use PHPUnit\Framework\TestCase;
 use SlavicNames\Exception\InvalidCharException;
 use SlavicNames\Exception\NotSupportedGenderException;
+use SlavicNames\SlavicNames;
 
 class SlavicNamesTest extends TestCase
 {
@@ -18,7 +19,7 @@ class SlavicNamesTest extends TestCase
         $name = '';
         try {
             $e = '';
-            $name = SlavicNames\SlavicNames::instance()->getName($char);
+            $name = SlavicNames::instance()->getName($char);
         } catch (InvalidCharException | NotSupportedGenderException $e) {
             $e = $e->getMessage();
         }
@@ -36,7 +37,7 @@ class SlavicNamesTest extends TestCase
         $char = '123';
         try {
             $e = '';
-            SlavicNames\SlavicNames::instance()->getName($char);
+            SlavicNames::instance()->getName($char);
         } catch (InvalidCharException | NotSupportedGenderException $e) {
             $e = $e->getMessage();
         }
@@ -53,7 +54,7 @@ class SlavicNamesTest extends TestCase
         $name = '';
         try {
             $e = '';
-            $name = SlavicNames\SlavicNames::instance()->getName($char);
+            $name = SlavicNames::instance()->getName($char);
         } catch (InvalidCharException | NotSupportedGenderException $e) {
             $e = $e->getMessage();
         }
@@ -72,7 +73,7 @@ class SlavicNamesTest extends TestCase
         $name = 'x';
         try {
             $e = '';
-            $name = SlavicNames\SlavicNames::instance()->getName($char);
+            $name = SlavicNames::instance()->getName($char);
         } catch (InvalidCharException | NotSupportedGenderException $e) {
             $e = $e->getMessage();
         }
@@ -90,7 +91,7 @@ class SlavicNamesTest extends TestCase
         $name = 'x';
         try {
             $e = '';
-            $name = SlavicNames\SlavicNames::instance()->getName($char);
+            $name = SlavicNames::instance()->getName($char);
         } catch (InvalidCharException | NotSupportedGenderException $e) {
             $e = $e->getMessage();
         }
@@ -101,17 +102,62 @@ class SlavicNamesTest extends TestCase
     /**
      * @test
      */
-    public function testGetRandomName(): void
+    public function testGetRandomName_defaultMale(): void
     {
         $name = '';
         try {
             $e = '';
-            $name = SlavicNames\SlavicNames::instance()->getRandomName();
+            $name = SlavicNames::instance()->getRandomName();
         } catch (NotSupportedGenderException $e) {
             $e = $e->getMessage();
         }
         $this->assertEmpty($e);
         $this->assertNotEmpty($name);
-        //TODO:: more tests after create female dictionary
+    }
+
+    public function testGetRandomName_randomGender(): void
+    {
+        $names = [];
+        $err = [];
+        foreach (range(1, 100) as $key) {
+            try {
+                $names[$key] = SlavicNames::instance()->getRandomName(SlavicNames::RANDOM);
+            } catch (NotSupportedGenderException $e) {
+                $err[] = $e->getMessage();
+            }
+        }
+        $this->assertEmpty($err);
+        $this->assertTrue(count($names) > count(array_unique($names))); //little bit optimistic
+    }
+
+    /**
+     * @test
+     */
+    public function testGetRandomName_notSupportedGender(): void
+    {
+        try {
+            $e = '';
+            SlavicNames::instance()->getRandomName(666);
+        } catch (NotSupportedGenderException $e) {
+            $e = $e->getMessage();
+        }
+        $this->assertStringStartsWith('unsupported gender', $e);
+    }
+
+    /**
+     * @test
+     */
+    public function testGetName_female(): void
+    {
+        //there is only 1 female name f
+        $name = '';
+        try {
+            $e = '';
+            $name = SlavicNames::instance()->getName('f', SlavicNames::FEMALE);
+        } catch (InvalidCharException | NotSupportedGenderException $e) {
+            $e = $e->getMessage();
+        }
+        $this->assertEmpty($e);
+        $this->assertSame('Falislawa', $name);
     }
 }
