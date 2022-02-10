@@ -7,7 +7,6 @@ namespace SSystems\SlavicNames;
 use Exception;
 use SSystems\SlavicNames\Exception\InvalidCharException;
 use SSystems\SlavicNames\Exception\NotSupportedGenderException;
-use function PHPUnit\Framework\arrayHasKey;
 
 class SlavicNames
 {
@@ -94,7 +93,7 @@ class SlavicNames
      */
     private function checkGender(string $gender): void
     {
-        if (!arrayHasKey($gender, self::GENDERS)) {
+        if (!array_key_exists($gender, self::GENDERS)) {
             throw new NotSupportedGenderException('unsupported gender:' . $gender);
         }
     }
