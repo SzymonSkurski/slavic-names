@@ -1,1 +1,2 @@
-# slavic-names
+#Generator of random proto-Slavic names.
+
