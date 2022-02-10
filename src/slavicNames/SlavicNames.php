@@ -1,12 +1,12 @@
 <?php
 
 
-namespace SSystems\SlavicNames;
+namespace SlavicNames;
 
 
 use Exception;
-use SSystems\SlavicNames\Exception\InvalidCharException;
-use SSystems\SlavicNames\Exception\NotSupportedGenderException;
+use SlavicNames\Exception\InvalidCharException;
+use SlavicNames\Exception\NotSupportedGenderException;
 
 class SlavicNames
 {
@@ -112,7 +112,6 @@ class SlavicNames
     {
         $gender = $this->getGenderName();
         $file = $this->getRandFilename();
-//        var_dump(compact('gender', 'file'));
         return __DIR__ . '/dictionary/names/' . $gender . '/' . $file;
     }
 

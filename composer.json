@@ -1,4 +1,5 @@
 {
+    "name": "ssystems/slavic-names",
     "authors": [
         {
             "name": "Szymon Skurski",
@@ -8,7 +9,6 @@
     "description": "Generator of random proto-Slavic names. You can use them to enrich your fantasy world.",
     "license": "proprietary",
     "minimum-stability": "dev",
-    "name": "ssystems/slavic-names",
     "require": {
         "php": "^7.4"
     },
@@ -18,14 +18,10 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "SSystems\\SlavicNames\\":
-            [
-                "../slavic-names"
-            ],
-            "SSystems\\":
-            [
-                "../"
-            ]
-        }
+            "SlavicNames\\": ["src/slavicNames/"]
+        },
+        "files": [
+            "src/slavicNames/SlavicNames.php"
+        ]
     }
-    }
+}

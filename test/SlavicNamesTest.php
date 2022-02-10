@@ -2,8 +2,8 @@
 
 
 use PHPUnit\Framework\TestCase;
-use SSystems\SlavicNames\Exception\InvalidCharException;
-use SSystems\SlavicNames\Exception\NotSupportedGenderException;
+use SlavicNames\Exception\InvalidCharException;
+use SlavicNames\Exception\NotSupportedGenderException;
 
 class SlavicNamesTest extends TestCase
 {
@@ -18,7 +18,7 @@ class SlavicNamesTest extends TestCase
         $name = '';
         try {
             $e = '';
-            $name = SSystems\SlavicNames\SlavicNames::instance()->getName($char);
+            $name = SlavicNames\SlavicNames::instance()->getName($char);
         } catch (InvalidCharException | NotSupportedGenderException $e) {
             $e = $e->getMessage();
         }
@@ -36,7 +36,7 @@ class SlavicNamesTest extends TestCase
         $char = '123';
         try {
             $e = '';
-            SSystems\SlavicNames\SlavicNames::instance()->getName($char);
+            SlavicNames\SlavicNames::instance()->getName($char);
         } catch (InvalidCharException | NotSupportedGenderException $e) {
             $e = $e->getMessage();
         }
@@ -53,7 +53,7 @@ class SlavicNamesTest extends TestCase
         $name = '';
         try {
             $e = '';
-            $name = SSystems\SlavicNames\SlavicNames::instance()->getName($char);
+            $name = SlavicNames\SlavicNames::instance()->getName($char);
         } catch (InvalidCharException | NotSupportedGenderException $e) {
             $e = $e->getMessage();
         }
@@ -72,7 +72,7 @@ class SlavicNamesTest extends TestCase
         $name = 'x';
         try {
             $e = '';
-            $name = SSystems\SlavicNames\SlavicNames::instance()->getName($char);
+            $name = SlavicNames\SlavicNames::instance()->getName($char);
         } catch (InvalidCharException | NotSupportedGenderException $e) {
             $e = $e->getMessage();
         }
@@ -90,7 +90,7 @@ class SlavicNamesTest extends TestCase
         $name = 'x';
         try {
             $e = '';
-            $name = SSystems\SlavicNames\SlavicNames::instance()->getName($char);
+            $name = SlavicNames\SlavicNames::instance()->getName($char);
         } catch (InvalidCharException | NotSupportedGenderException $e) {
             $e = $e->getMessage();
         }
@@ -106,7 +106,7 @@ class SlavicNamesTest extends TestCase
         $name = '';
         try {
             $e = '';
-            $name = SSystems\SlavicNames\SlavicNames::instance()->getRandomName();
+            $name = SlavicNames\SlavicNames::instance()->getRandomName();
         } catch (NotSupportedGenderException $e) {
             $e = $e->getMessage();
         }

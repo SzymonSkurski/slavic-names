@@ -1,6 +1,6 @@
 <?php
 
-namespace SSystems\SlavicNames\Exception;
+namespace SlavicNames\Exception;
 
 use Exception;
 
